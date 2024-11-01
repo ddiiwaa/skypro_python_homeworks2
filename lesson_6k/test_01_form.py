@@ -36,35 +36,36 @@ def insert_click(site:str):
     stat_zipC = driver.find_element(By.ID,"zip-code").get_attribute("class")
 
     result = [
-        {"first_name" : stat_first_name},
-        {"last_name" : stat_last_name},
-        {"address" : stat_address},
-        {"city" : stat_city},
-        {"country" : stat_country},
-        {"e_mail" : stat_e_mail},
-        {"phone" : stat_phone},
-        {"job" : stat_job},
-        {"company" : stat_company},
-        {"zipC" : stat_zipC}]
+        {"first_name" :stat_first_name},
+        {"last_name" :stat_last_name},
+        {"address" :stat_address},
+        {"city" :stat_city},
+        {"country" :stat_country},
+        {"e_mail" :stat_e_mail},
+        {"phone" :stat_phone},
+        {"job" :stat_job},
+        {"company" :stat_company},
+        {"zipC" :stat_zipC}]
 
     return result
 
 
-data_list =insert_click("https://bonigarcia.dev/selenium-webdriver-java/data-types.html")
+data_list = insert_click("https://bonigarcia.dev/selenium-webdriver-java/data-types.html")
 
 data = {k: v for d in data_list for k, v in d.items()}
 
 
 @pytest.mark.parametrize('text',[(data["zipC"])])
-def test_ZIP(text):
+def test_zip(text):
     assert text == "alert py-2 alert-danger"
 
 
-@pytest.mark.parametrize('text',[(data["first_name"]),(data["last_name"]),
-    (data["address"]),(data["city"]),
-    (data["country"]),(data["e_mail"]),
-    (data["phone"]),(data["job"]),(data["company"])])
+@pytest.mark.parametrize('text',[(data["first_name"]), (data["last_name"]),
+    (data["address"]), (data["city"]),
+    (data["country"]), (data["e_mail"]),
+    (data["phone"]), (data["job"]), (data["company"])])
 def test_rest(text):
     assert text == "alert py-2 alert-success"
+
 
 driver.quit()
